@@ -29,7 +29,8 @@
     "openclaw",
     "docs",
     "LICENSE",
-    "openclaw.plugin.json"
+    "openclaw.plugin.json",
+    "dist/contracts"
   ],
   "bin": {
     "adrouter-collector": "dist/src/cli.js"

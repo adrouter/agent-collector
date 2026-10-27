@@ -1,0 +1,7 @@
+{
+  "id": "adrouter-collector",
+  "name": "AdRouter Collector",
+  "description": "Opt-in metadata analytics for one explicitly enrolled agent instance",
+  "activation": {"onStartup": true},
+  "configSchema": {"type": "object", "additionalProperties": false, "properties": {}}
+}

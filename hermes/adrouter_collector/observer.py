@@ -37,7 +37,7 @@ class Observer:
             if p["state"] != "active" or not p["permissions"]["private_metadata"] or datetime.fromisoformat(p["lease_expires_at"].replace("Z", "+00:00")) <= datetime.now(timezone.utc):
                 return
             context = context or {}
-            if context.get("scope") != self.scope or context.get("private") is not False:
+            if context.get("scope") != self.scope or context.get("private") is True:
                 self.drop("unattributed_or_private")
                 return
             if hook not in MAPPINGS:
@@ -56,15 +56,17 @@ class Observer:
                 obs["status"] = raw["status"]
             if hook == "api_request_error":
                 obs["status"] = "error"
+            if hook == "post_api_request":
+                obs["status"] = "success"
             if hook == "on_session_end":
                 obs["status"] = "interrupted" if raw.get("interrupted") is True else "error" if raw.get("failed") is True else "success" if raw.get("completed") is True else "unknown"
             duration = raw.get("duration_ms")
             if isinstance(duration, (int, float)) and not isinstance(duration, bool) and 0 <= duration <= 604800000:
                 obs["duration_ms"] = duration
             retry = raw.get("retry_count")
-            if isinstance(retry, int) and not isinstance(retry, bool) and 0 <= retry < 1000:
+            if hook in ("post_tool_call", "post_api_request", "api_request_error") and isinstance(retry, int) and not isinstance(retry, bool) and 0 <= retry < 1000:
                 obs.update(attempt=retry+1, retry=retry > 0)
-            if p["permissions"]["private_content"] and obs.get("tool_key") == "web_search" and "web_search" in p["selected_tools"] and "tool_excerpt" in p["content_fields"]:
+            if context.get("private") is False and p["permissions"]["private_content"] and obs.get("tool_key") == "web_search" and "web_search" in p["selected_tools"] and "tool_excerpt" in p["content_fields"]:
                 excerpt = filter_content(raw.get("result"))
                 if excerpt:
                     event["content"] = {"tool_excerpt": excerpt}

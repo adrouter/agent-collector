@@ -43,7 +43,7 @@ New repository and isolated resources; scoped commits and PRs. Admission stays o
 
 ### Validation Results
 
-- `npm run check`: not run
+- `npm run check`: passed locally for the current source. This is not full native/hosted acceptance.
 
 ---
 
@@ -51,7 +51,7 @@ New repository and isolated resources; scoped commits and PRs. Admission stays o
 
 ### Status
 
-`todo`
+`in_progress`
 
 ### Tasks
 
@@ -72,7 +72,7 @@ New repository and isolated resources; scoped commits and PRs. Admission stays o
 
 ### Status
 
-`todo`
+`in_progress`
 
 ### Tasks
 
@@ -90,7 +90,7 @@ New repository and isolated resources; scoped commits and PRs. Admission stays o
 
 ## Follow-up Work
 
-Native six-combination acceptance, hosted OAuth, restore and load evidence; pilot readiness acceptance.
+See README and docs/remaining-work.md (or the README remaining-gates paragraph) for implementation gaps as well as native, browser, load, restore and hosted qualification. Pilot readiness remains unaccepted.
 
 ## Decision Log
 

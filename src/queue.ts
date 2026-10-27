@@ -1,6 +1,6 @@
 import { DatabaseSync } from 'node:sqlite';
-import { chmodSync, mkdirSync, realpathSync } from 'node:fs';
-import { join } from 'node:path';
+import { chmodSync, mkdirSync, realpathSync, existsSync } from 'node:fs';
+import { join,dirname,relative } from 'node:path';
 import { homedir } from 'node:os';
 import { execFileSync } from 'node:child_process';
 import type { Event } from './contract.js';
@@ -8,7 +8,10 @@ import type { Event } from './contract.js';
 export function dataDirectory(): string {
   const base = process.platform === 'win32' ? process.env.LOCALAPPDATA : process.platform === 'darwin' ? join(homedir(), 'Library', 'Application Support') : process.env.XDG_DATA_HOME ?? join(homedir(), '.local', 'share');
   if (!base) throw new Error('local_storage_unavailable');
-  const dir = join(base, 'AdRouterCollector');
+  const dir = join(base, 'AdRouterCollector', 'openclaw');
+  let ancestor=dir;while(!existsSync(ancestor))ancestor=dirname(ancestor);
+  const prospective=join(realpathSync(ancestor),relative(ancestor,dir));
+  if (/Mobile Documents|iCloud|OneDrive|(?:^|[/\\])(?:Documents|Desktop)(?:[/\\]|$)/i.test(prospective)) throw new Error('synced_storage_forbidden');
   mkdirSync(dir, {recursive:true, mode:0o700});
   const resolved = realpathSync(dir);
   if (/Mobile Documents|iCloud|OneDrive|(?:^|[/\\])(?:Documents|Desktop)(?:[/\\]|$)/i.test(resolved)) throw new Error('synced_storage_forbidden');
