@@ -1,0 +1,152 @@
+[
+  {
+    "name": "synthetic-private-only",
+    "valid": true,
+    "event": {
+      "schema_version": 1,
+      "event_id": "00000000-0000-4000-8000-000000000001",
+      "event_type": "tool.completed",
+      "occurred_at": "2026-10-27T00:00:00Z",
+      "framework": "hermes",
+      "framework_version": "0.22.5",
+      "collector_version": "0.1.0",
+      "capability_version": "hermes-v1",
+      "source_hook": "post_tool_call",
+      "installation_id": "00000000-0000-4000-8000-000000000001",
+      "process_ref": "00000000-0000-4000-8000-000000000001",
+      "sequence": 0,
+      "consent_version": 1,
+      "grant_epochs": {
+        "private_metadata": "00000000-0000-4000-8000-000000000001",
+        "private_content": null,
+        "research_metadata": null,
+        "research_content": null
+      },
+      "observation": {
+        "tool_key": "unknown",
+        "status": "unknown"
+      },
+      "synthetic": true
+    }
+  },
+  {
+    "name": "unknown-field",
+    "valid": false,
+    "event": {
+      "schema_version": 1,
+      "event_id": "00000000-0000-4000-8000-000000000001",
+      "event_type": "tool.completed",
+      "occurred_at": "2026-10-27T00:00:00Z",
+      "framework": "hermes",
+      "framework_version": "0.22.5",
+      "collector_version": "0.1.0",
+      "capability_version": "hermes-v1",
+      "source_hook": "post_tool_call",
+      "installation_id": "00000000-0000-4000-8000-000000000001",
+      "process_ref": "00000000-0000-4000-8000-000000000001",
+      "sequence": 0,
+      "consent_version": 1,
+      "grant_epochs": {
+        "private_metadata": "00000000-0000-4000-8000-000000000001",
+        "private_content": null,
+        "research_metadata": null,
+        "research_content": null
+      },
+      "observation": {
+        "tool_key": "unknown",
+        "status": "unknown"
+      },
+      "synthetic": true,
+      "raw_args": "SYNTHETIC"
+    }
+  },
+  {
+    "name": "unsupported-version",
+    "valid": false,
+    "event": {
+      "schema_version": 2,
+      "event_id": "00000000-0000-4000-8000-000000000001",
+      "event_type": "tool.completed",
+      "occurred_at": "2026-10-27T00:00:00Z",
+      "framework": "hermes",
+      "framework_version": "0.22.5",
+      "collector_version": "0.1.0",
+      "capability_version": "hermes-v1",
+      "source_hook": "post_tool_call",
+      "installation_id": "00000000-0000-4000-8000-000000000001",
+      "process_ref": "00000000-0000-4000-8000-000000000001",
+      "sequence": 0,
+      "consent_version": 1,
+      "grant_epochs": {
+        "private_metadata": "00000000-0000-4000-8000-000000000001",
+        "private_content": null,
+        "research_metadata": null,
+        "research_content": null
+      },
+      "observation": {
+        "tool_key": "unknown",
+        "status": "unknown"
+      },
+      "synthetic": true
+    }
+  },
+  {
+    "name": "negative-duration",
+    "valid": false,
+    "event": {
+      "schema_version": 1,
+      "event_id": "00000000-0000-4000-8000-000000000001",
+      "event_type": "tool.completed",
+      "occurred_at": "2026-10-27T00:00:00Z",
+      "framework": "hermes",
+      "framework_version": "0.22.5",
+      "collector_version": "0.1.0",
+      "capability_version": "hermes-v1",
+      "source_hook": "post_tool_call",
+      "installation_id": "00000000-0000-4000-8000-000000000001",
+      "process_ref": "00000000-0000-4000-8000-000000000001",
+      "sequence": 0,
+      "consent_version": 1,
+      "grant_epochs": {
+        "private_metadata": "00000000-0000-4000-8000-000000000001",
+        "private_content": null,
+        "research_metadata": null,
+        "research_content": null
+      },
+      "observation": {
+        "duration_ms": -1
+      },
+      "synthetic": true
+    }
+  },
+  {
+    "name": "non-UTC",
+    "valid": false,
+    "event": {
+      "schema_version": 1,
+      "event_id": "00000000-0000-4000-8000-000000000001",
+      "event_type": "tool.completed",
+      "occurred_at": "2026-10-27T00:00:00+08:00",
+      "framework": "hermes",
+      "framework_version": "0.22.5",
+      "collector_version": "0.1.0",
+      "capability_version": "hermes-v1",
+      "source_hook": "post_tool_call",
+      "installation_id": "00000000-0000-4000-8000-000000000001",
+      "process_ref": "00000000-0000-4000-8000-000000000001",
+      "sequence": 0,
+      "consent_version": 1,
+      "grant_epochs": {
+        "private_metadata": "00000000-0000-4000-8000-000000000001",
+        "private_content": null,
+        "research_metadata": null,
+        "research_content": null
+      },
+      "observation": {
+        "tool_key": "unknown",
+        "status": "unknown"
+      },
+      "synthetic": true
+    }
+  }
+]

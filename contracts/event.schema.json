@@ -1,0 +1,438 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://adrouter.co/contracts/collector-v1.schema.json",
+  "title": "AdRouter sanitized observation v1",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "event_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "event_type": {
+      "enum": [
+        "session.started",
+        "session.ended",
+        "run.started",
+        "run.ended",
+        "tool.completed",
+        "model.completed",
+        "model.failed"
+      ]
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    },
+    "framework": {
+      "enum": [
+        "openclaw",
+        "hermes"
+      ]
+    },
+    "framework_version": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_.:-]{1,96}$"
+    },
+    "collector_version": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_.:-]{1,96}$"
+    },
+    "capability_version": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_.:-]{1,96}$"
+    },
+    "source_hook": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_.:-]{1,96}$"
+    },
+    "installation_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "process_ref": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "consent_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "grant_epochs": {
+      "type": "object",
+      "properties": {
+        "private_metadata": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uuid"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "private_content": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uuid"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "research_metadata": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uuid"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "research_content": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uuid"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "private_metadata",
+        "private_content",
+        "research_metadata",
+        "research_content"
+      ],
+      "additionalProperties": false
+    },
+    "observation": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "success",
+            "error",
+            "blocked",
+            "interrupted",
+            "unknown"
+          ]
+        },
+        "error_category": {
+          "enum": [
+            "timeout",
+            "network",
+            "authentication",
+            "rate_limit",
+            "invalid_input",
+            "tool_error",
+            "unknown"
+          ]
+        },
+        "duration_ms": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 604800000
+        },
+        "attempt": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "retry": {
+          "type": "boolean"
+        },
+        "input_tokens": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000000
+        },
+        "output_tokens": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000000
+        },
+        "reported_cost": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "currency": {
+          "const": "USD"
+        },
+        "tool_key": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.:-]{1,96}$"
+        },
+        "service_key": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.:-]{1,96}$"
+        },
+        "model_key": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.:-]{1,96}$"
+        },
+        "provider_key": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.:-]{1,96}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "synthetic": {
+      "type": "boolean"
+    },
+    "session_ref": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "run_ref": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "call_ref": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "parent_run_ref": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "content": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 2,
+      "properties": {
+        "task_description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "tool_excerpt": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "event_id",
+    "event_type",
+    "occurred_at",
+    "framework",
+    "framework_version",
+    "collector_version",
+    "capability_version",
+    "source_hook",
+    "installation_id",
+    "process_ref",
+    "sequence",
+    "consent_version",
+    "grant_epochs",
+    "observation",
+    "synthetic"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "enum": [
+              "tool.completed"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "observation": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "enum": [
+                  "success",
+                  "error",
+                  "blocked",
+                  "interrupted",
+                  "unknown"
+                ]
+              },
+              "error_category": {
+                "enum": [
+                  "timeout",
+                  "network",
+                  "authentication",
+                  "rate_limit",
+                  "invalid_input",
+                  "tool_error",
+                  "unknown"
+                ]
+              },
+              "duration_ms": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 604800000
+              },
+              "attempt": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1000
+              },
+              "retry": {
+                "type": "boolean"
+              },
+              "tool_key": {
+                "type": "string",
+                "pattern": "^[a-zA-Z0-9_.:-]{1,96}$"
+              },
+              "service_key": {
+                "type": "string",
+                "pattern": "^[a-zA-Z0-9_.:-]{1,96}$"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "enum": [
+              "model.completed",
+              "model.failed"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "observation": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "enum": [
+                  "success",
+                  "error",
+                  "blocked",
+                  "interrupted",
+                  "unknown"
+                ]
+              },
+              "error_category": {
+                "enum": [
+                  "timeout",
+                  "network",
+                  "authentication",
+                  "rate_limit",
+                  "invalid_input",
+                  "tool_error",
+                  "unknown"
+                ]
+              },
+              "duration_ms": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 604800000
+              },
+              "attempt": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1000
+              },
+              "retry": {
+                "type": "boolean"
+              },
+              "model_key": {
+                "type": "string",
+                "pattern": "^[a-zA-Z0-9_.:-]{1,96}$"
+              },
+              "provider_key": {
+                "type": "string",
+                "pattern": "^[a-zA-Z0-9_.:-]{1,96}$"
+              },
+              "input_tokens": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1000000000000
+              },
+              "output_tokens": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1000000000000
+              },
+              "reported_cost": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1000000
+              },
+              "currency": {
+                "const": "USD"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "enum": [
+              "session.started",
+              "session.ended",
+              "run.started",
+              "run.ended"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "observation": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "enum": [
+                  "success",
+                  "error",
+                  "blocked",
+                  "interrupted",
+                  "unknown"
+                ]
+              },
+              "duration_ms": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 604800000
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      }
+    }
+  ]
+}

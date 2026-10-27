@@ -1,0 +1,3 @@
+name: adrouter-collector
+version: "0.1.0"
+description: "Opt-in metadata analytics for one explicitly enrolled Hermes profile"

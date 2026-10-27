@@ -1,0 +1,31 @@
+{
+  "manifest_version": 1,
+  "release_status": "development_candidate",
+  "frameworks": {
+    "openclaw": {
+      "version": "2026.10.7",
+      "runtime": "Node 24.22.1",
+      "capability_version": "openclaw-v1",
+      "hooks": {"after_tool_call":"tool.completed","model_call_ended":["model.completed","model.failed"],"session_start":"session.started","session_end":"session.ended"},
+      "scope": "Host-supplied agentId must match the enrolled agent. Missing identity drops the observation.",
+      "content": "No conversation hooks registered in this candidate. Optional content unavailable without a supported privacy signal.",
+      "unknown": ["User goal outcome", "Usage and cost where not supplied by the selected hook", "Incognito state where the host does not expose it"],
+      "installed_host_acceptance": "not_run"
+    },
+    "hermes": {
+      "version": "0.22.5",
+      "runtime": "Python 3.12.2",
+      "capability_version": "hermes-v1",
+      "hooks": {"post_tool_call":"tool.completed","post_api_request":"model.completed","api_request_error":"model.failed","on_session_start":"session.started","on_session_end":"run.ended","on_session_finalize":"session.ended"},
+      "scope": "Profile-scoped PluginContext.profile_name must match enrollment at callback time.",
+      "content": "Only web_search.result strings may become tool_excerpt after explicit permission and local field selection; absent privacy state omits content.",
+      "unknown": ["Turn start", "User goal outcome", "Auxiliary requests", "Usage and cost pending source-unit qualification"],
+      "installed_host_acceptance": "not_run"
+    }
+  },
+  "platforms": [
+    {"os":"Ubuntu 24.04 x64","status":"not_verified"},
+    {"os":"Apple Silicon macOS","status":"source_tests_only"},
+    {"os":"Native Windows 11 x64","status":"not_verified"}
+  ]
+}
