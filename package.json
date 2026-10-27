@@ -1,0 +1,42 @@
+{
+  "name": "@adrouter/agent-collector",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "engines": {
+    "node": "24.22.1"
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "check": "npm run typecheck && npm test && npm run build",
+    "test:python": "python -m unittest discover -s hermes -v",
+    "package": "npm run build && node scripts/package.mjs"
+  },
+  "dependencies": {
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.5",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2"
+  },
+  "files": [
+    "dist/src",
+    "contracts",
+    "openclaw",
+    "docs",
+    "LICENSE",
+    "openclaw.plugin.json"
+  ],
+  "bin": {
+    "adrouter-collector": "dist/src/cli.js"
+  },
+  "openclaw": {
+    "extensions": [
+      "./openclaw/index.ts"
+    ]
+  }
+}
